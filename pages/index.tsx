@@ -1,14 +1,33 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link';
-//import Router from 'next/router'
-import React from 'react'
+import React, { useState } from 'react';
 import {FaFacebookF, FaLinkedinIn, FaGoogle, FaRegEnvelope} from 'react-icons/fa';
 import { MdLockOutline }  from 'react-icons/md';
+import Router from 'next/router';
 import styles from '../styles/Home.module.css'
 
+
+
 export default function signup() {
- 
+  
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [name, setName] = useState('');
+
+  const submitData = async (e: React.SyntheticEvent) => {
+    e.preventDefault();
+    try {
+      const body = { email : email, password:password,name : name };
+      await fetch('/api/create', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };  
   
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
@@ -24,36 +43,22 @@ export default function signup() {
                 <h2 className="text-3xl font-bold text-green-500 mb-2">Sign In to Account</h2>
                         <div className="border-2 w-10 border-white inline-block mb-2"></div>
                         <p className="text-gray-400 my-3">or use your Email Account</p>
-                        <form > 
+                        <form  onSubmit={submitData}> 
                         <div className="flex flex-col items-center">
                         <div  className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                           <FaRegEnvelope  className="text-gray-400 m-2"/>
-                          <input text="name" name="name" id="name" 
-                            
-                              placeholder="FullName"  className="bg-gray-100 outline-none text-sm"/> 
+                    <input autoFocus onChange={(e) => setName(e.target.value)}  placeholder="Name"type="text" value={name}
+                    className="bg-gray-100 outline-none text-sm" />
                         </div>
                         <div  className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                           <FaRegEnvelope  className="text-gray-400 m-2"/>
-                          <input text="email" name="email" id="email" placeholder="Email"  className="bg-gray-100 outline-none text-sm"/> 
+                          <input autoFocus onChange={(e) => setEmail(e.target.value)}  placeholder="Email"type="email" value={email}  className="bg-gray-100 outline-none text-sm"/> 
                         </div>
                         <div  className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                           <MdLockOutline className="text-gray-400 m-2"/>
-                          <input type="password" name="password" id="password" placeholder="password" className="bg-gray-100 outline-none text-sm"/> 
+                          <input autoFocus onChange={(e) => setPassword(e.target.value)}  placeholder="Password" type="Password" value={password} className="bg-gray-100 outline-none text-sm"/> 
                         </div>
-                        <div  className="bg-gray-100 w-64 p-2 flex items-center mb-3">
-                          <MdLockOutline className="text-gray-400 m-2"/>
-                          <input type="password" name="repassword" id="repassword" placeholder="repassword" 
-                            className="bg-gray-100 outline-none text-sm"/> 
-                        </div>
-                        <div className="flex justify-between w-64 mb-5">
-                          <label className="flex item-center text-xs">
-                          <input type="checkbox" name="remember" className="mr-1"/> 
-                          Remember me 
-                          </label>
-                          <a href="#" className="text-xs">Forget Password</a>
-                        </div>
-                        </div>
-
+                     </div>
                         <button type="submit" className='border-2 border-green-500 rounded-full px-12 py-2 inline-block font-semibo 
                          ld hover:bg-white hover:text-green-500'>
                            sign up
