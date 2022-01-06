@@ -13,7 +13,7 @@ export default async function handler(req,res){
 
         });
 		
-        res.status(200).json({ result, message:'submitted successfully'});
+        res.status(200).json({ message:'submitted successfully'});
     } catch(error){
 		console.log("entering this block");
         res.status(400).json({error});

@@ -1,15 +1,40 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
-import React from 'react';
-import Router from 'next/router';
+import React, { useState } from 'react';
+import Router, { useRouter } from 'next/router';
 import {FaFacebookF, FaLinkedinIn, FaGoogle, FaRegEnvelope} from 'react-icons/fa';
 import { MdLockOutline }  from 'react-icons/md';
 import Link from 'next/link';
+import { Result } from 'postcss';
+
 
 
 
 export default function Home() {
+
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
+const submitData = async (e: React.SyntheticEvent) => {
+  e.preventDefault();
+  try {
+    const body = { email : email, password:password };
+    const response =  await fetch('/api/login', { 
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body),
+    });
+    const data = await response.json() ;
+    //console.log(data);
+    console.log(data.message);
+    // var detail= ' <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">'+
+    // data.message +'</span>';
+   // router.push('/dashboard');
+  } catch (error) {
+    console.error(error);
+  }
+};  
    
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
@@ -37,16 +62,16 @@ export default function Home() {
 
                         </div>
                         <p className="text-gray-400 my-3">or use your Email Account</p>
-                        <form> 
+                        <form onSubmit={submitData}> 
                         <div className="flex flex-col items-center">
-                        <div htmlFor="email"  className="bg-gray-100 w-64 p-2 flex items-center mb-3">
+                        <div  className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                           <FaRegEnvelope  className="text-gray-400 m-2"/>
-                          <input text="email" name="email" id="email"
+                          <input autoFocus onChange={(e) => setEmail(e.target.value)} type="email" value={email}
                               placeholder="Email"  className="bg-gray-100 outline-none text-sm"/> 
                         </div>
-                        <div htmlFor="password" className="bg-gray-100 w-64 p-2 flex items-center mb-3">
+                        <div  className="bg-gray-100 w-64 p-2 flex items-center mb-3">
                           <MdLockOutline className="text-gray-400 m-2"/>
-                          <input type="password" name="password" id="password" placeholder="password"  className="bg-gray-100 outline-none text-sm"/> 
+                          <input type="password"  autoFocus onChange={(e) => setPassword(e.target.value)} value={password} placeholder="Password"  className="bg-gray-100 outline-none text-sm"/> 
                         </div>
                         <div className="flex justify-between w-64 mb-5">
                           <label className="flex item-center text-xs">
@@ -78,5 +103,5 @@ export default function Home() {
     </main>
     </div>
   )
-  }
+ }
 

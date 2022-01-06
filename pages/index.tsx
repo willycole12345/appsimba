@@ -9,6 +9,8 @@ import styles from '../styles/Home.module.css'
 
 
 
+
+
 export default function signup() {
   
     const [email, setEmail] = useState('');
@@ -19,11 +21,16 @@ export default function signup() {
     e.preventDefault();
     try {
       const body = { email : email, password:password,name : name };
-      await fetch('/api/create', {
+     const response = await fetch('/api/create', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(body),
       });
+      const data = await response.json() ;
+      console.log(data.message);
+    // var detail= ' <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">'+
+    //           data.message +'</span>';
+
     } catch (error) {
       console.error(error);
     }
@@ -32,7 +39,6 @@ export default function signup() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
-
       <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
         <div className="w-3/5 p-5">
           <div className="text-left font-bold">
