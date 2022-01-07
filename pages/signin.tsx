@@ -27,7 +27,14 @@ const submitData = async (e: React.SyntheticEvent) => {
     });
     const data = await response.json() ;
     //console.log(data);
-    console.log(data.message);
+    console.log(data.result.emai);
+    Router.push({
+      pathname: '/dashboard',
+      query: { 
+              number: data.result.id ,
+  
+         }
+  })
     // var detail= ' <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">'+
     // data.message +'</span>';
    // router.push('/dashboard');
@@ -35,7 +42,7 @@ const submitData = async (e: React.SyntheticEvent) => {
     console.error(error);
   }
 };  
-   
+
   return (
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">

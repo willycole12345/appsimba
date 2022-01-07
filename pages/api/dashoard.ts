@@ -1,16 +1,18 @@
-import prisma from "../../../lib/prisma";
+import prisma from "../../lib/prisma";
 
 export default async function handler(req,res){
     var message = "";
 	try {
-		const { email, password } = req.body;
+		const { id } = req.body;
         const result =  await prisma.user.findUnique({
             where:{
-                email:email,
+                id:id,
             
             },
           select: {
-            id: true,
+            name: true,
+            balance:true
+            
           }
 
         });
