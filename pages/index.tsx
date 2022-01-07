@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import Link from 'next/link';
+import Link from 'next/link'
 import React, { useState } from 'react';
 import {FaFacebookF, FaLinkedinIn, FaGoogle, FaRegEnvelope} from 'react-icons/fa';
 import { MdLockOutline }  from 'react-icons/md';
@@ -11,11 +11,11 @@ import styles from '../styles/Home.module.css'
 
 
 
-export default function signup() {
+function Signup (){
   
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
-    const [name, setName] = useState('');
+    const [email,setEmail] = useState('');
+    const [password,setPassword] = useState('');
+    const [name,setName] = useState('');
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -87,4 +87,4 @@ export default function signup() {
     </div>
   )
   }
-
+  export default Signup;

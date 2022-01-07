@@ -6,11 +6,11 @@ import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 
 
-
-export default  function dashboard( ) {
+ function Dashboard( ) {
     const {query} = useRouter();
     console.log(query.number);
-  
+    
+
         return (
             
             <div>
@@ -22,3 +22,5 @@ export default  function dashboard( ) {
         );
     
 }   
+
+export default Dashboard;
