@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link';
-import React, { useState } from 'React';
+import React, { useState } from 'react';
 import {FaFacebookF, FaLinkedinIn, FaGoogle, FaRegEnvelope} from 'react-icons/fa';
 import { MdLockOutline }  from 'react-icons/md';
 import Router from 'next/router';

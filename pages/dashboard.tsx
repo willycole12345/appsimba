@@ -2,7 +2,7 @@ import Head from 'next/head'
 import Image from 'next/image'
 import Link from 'next/link';
 import { useRouter } from 'next/router'
-import React, { useState } from 'React';
+import React, { useState } from 'react';
 import Navbar from '../components/Navbar';
 
 
