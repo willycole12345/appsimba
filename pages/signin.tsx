@@ -91,7 +91,7 @@ const submitData = async (e: React.SyntheticEvent) => {
 
                         <button type="submit" className='border-2 border-green-500 rounded-full px-12 py-2 inline-block font-semibo 
                          ld hover:bg-white hover:text-green-500'>
-                           sign up
+                           sign in
                         </button>
                         </form>
             </div>
