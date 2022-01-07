@@ -4,10 +4,9 @@ import Link from 'next/link'
 import React, { useState } from 'react';
 import {FaFacebookF, FaLinkedinIn, FaGoogle, FaRegEnvelope} from 'react-icons/fa';
 import { MdLockOutline }  from 'react-icons/md';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css'
-
-
+import Swal from 'sweetalert2'
 
 
 
@@ -16,6 +15,7 @@ function Signup (){
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
     const [name,setName] = useState('');
+    const router = useRouter();
 
   const submitData = async (e: React.SyntheticEvent) => {
     e.preventDefault();
@@ -28,15 +28,20 @@ function Signup (){
       });
       const data = await response.json() ;
       console.log(data.message);
-    // var detail= ' <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">'+
-    //           data.message +'</span>';
-
+      Swal.fire({
+        title: 'success',
+        text: data.message
+      })
+      Router.push({
+        pathname: '/signin',
+    })
     } catch (error) {
       console.error(error);
     }
   };  
   
   return (
+    
     <div className="flex flex-col items-center justify-center min-h-screen py-2 bg-gray-100">
     <main className="flex flex-col items-center justify-center w-full flex-1 px-20 text-center">
       <div className="bg-white rounded-2xl shadow-2xl flex w-2/3 max-w-4xl">
@@ -44,7 +49,6 @@ function Signup (){
           <div className="text-left font-bold">
               <span className="text-left font-bold">Company</span> Name
             </div> 
-            
             <div className="py-10">
                 <h2 className="text-3xl font-bold text-green-500 mb-2">Sign In to Account</h2>
                         <div className="border-2 w-10 border-white inline-block mb-2"></div>

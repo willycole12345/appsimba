@@ -8,15 +8,15 @@ export default async function handler(req,res){
             name: name,
             email: email,
             password: password,
-			balance: 100,
+		      	balance: 100,
           }
 
         });
 		
         res.status(200).json({ message:'submitted successfully'});
     } catch(error){
-		console.log("entering this block");
-        res.status(400).json({error});
+      console.log("entering this block");
+        res.status(400).json({error,message:'User not Registered'});
     }
     
 }

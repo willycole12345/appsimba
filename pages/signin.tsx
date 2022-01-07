@@ -7,6 +7,8 @@ import {FaFacebookF, FaLinkedinIn, FaGoogle, FaRegEnvelope} from 'react-icons/fa
 import { MdLockOutline }  from 'react-icons/md';
 import Link from 'next/link';
 import { Result } from 'postcss';
+import Swal from 'sweetalert2'
+
 
 
 
@@ -28,6 +30,11 @@ const submitData = async (e: React.SyntheticEvent) => {
     const data = await response.json() ;
     //console.log(data);
     console.log(data.result.emai);
+    Swal.fire({
+      title: 'success',
+      text: data.message
+    })
+    
     Router.push({
       pathname: '/dashboard',
       query: { 
@@ -38,8 +45,11 @@ const submitData = async (e: React.SyntheticEvent) => {
     // var detail= ' <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-emerald-600 bg-emerald-200 uppercase last:mr-0 mr-1">'+
     // data.message +'</span>';
    // router.push('/dashboard');
-  } catch (error) {
-    console.error(error);
+  } catch (error) { 
+  Swal.fire({
+    title: 'error!',
+    text: error.message
+  })
   }
 };  
 
